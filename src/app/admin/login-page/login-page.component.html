@@ -1,1 +1,22 @@
-<p>login-page works!</p>
+<form class="card" id="form" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Войти в панель администратора</h2>
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">{{error}}</div>
+  <div class="form-control" [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
+    <label for="email">Email</label>
+    <input type="text" id="email" formControlName="email">
+    <div class="validation" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+      <small *ngIf="form.get('email')?.errors">Ошибка ввода email</small>
+    </div>
+  </div>
+  <div class="form-control" [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+    <label for="password">Password</label>
+    <input type="text" id="password" formControlName="password">
+    <div class="validation" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+      <small *ngIf="form.get('password')?.errors">Пароль должен быть не менее 6 символов</small>
+    </div>
+  </div>
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="form.invalid || submitted"
+  >Войти</button>
+</form>
