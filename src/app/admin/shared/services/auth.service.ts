@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {FbAuthResp, User} from "../../../shared/interfaces";
 import {catchError, Observable, Subject, tap, throwError} from "rxjs";
-import {envinronment} from "../../../../environments/Envenronment";
+import {environment} from "../../../../environments/Envenronment";
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,7 @@ export class AuthService {
 
   login(user: User): Observable<any> {
     user.returnSecureToken = true
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${envinronment.apiKey}
+    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}
 `, user)
       .pipe(
         tap(this.setToken as any),
