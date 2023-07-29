@@ -28,8 +28,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
 
 
   remove(id: string) {
-    this.postService.remove(id).subscribe(() => {
-      this.posts.filter(post => post.id !== id)
+    this.dSub = this.postService.remove(id).subscribe(() => {
+      this.posts = this.posts.filter(post => post.id !== id)
     })
   }
 }
